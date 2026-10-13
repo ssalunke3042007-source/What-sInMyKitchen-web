@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Recipe finder based on ingredients you already have in your kitchen." />
+    <title>What’sInMyKitchen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/styles.css?v=20261013" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-wrap">
+        <a href="#top" class="brand" aria-label="What’sInMyKitchen home">What’sInMyKitchen</a>
+        <nav class="main-nav" aria-label="Main navigation">
+          <a href="#ingredient-finder">Ingredients</a>
+          <a href="#results">Recipes</a>
+          <a href="#favorites">Favourites</a>
+          <a href="#about">About</a>
+        </nav>
+        <button class="secondary-btn nav-btn" id="mobile-menu-toggle" aria-label="Toggle menu">Menu</button>
+      </div>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <span class="eyebrow">Smart kitchen matching</span>
+            <h1>Good Food Starts With What You Have.</h1>
+            <p>
+              Discover recipes using the ingredients already sitting in your kitchen.
+              Save time, reduce waste, and cook smarter with every meal.
+            </p>
+            <div class="hero-actions">
+              <a class="primary-btn" href="#ingredient-finder">Find My Recipe</a>
+              <a class="secondary-btn" href="#results">Explore Recipes</a>
+            </div>
+            <ul class="hero-stats" aria-label="Key site statistics">
+              <li><strong>50+</strong><span>Ingredients</span></li>
+              <li><strong>25+</strong><span>Recipes</span></li>
+              <li><strong>Instant</strong><span>Match results</span></li>
+            </ul>
+          </div>
+          <div class="hero-visual" aria-label="Featured recipe image">
+            <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80" alt="Fresh ingredients and meal prep" />
+          </div>
+        </div>
+      </section>
+
+      <section class="featured-cards container" aria-labelledby="featured-title">
+        <div class="section-head">
+          <h2 id="featured-title">Popular picks</h2>
+        </div>
+        <div class="card-row" id="featured-list">
+          <article class="mini-card">
+            <span class="chip">Fast</span>
+            <h3>Tomato Rice</h3>
+            <p>Fresh, aromatic, and pantry-friendly.</p>
+          </article>
+          <article class="mini-card">
+            <span class="chip accent">Vegetarian</span>
+            <h3>Aloo Gobi</h3>
+            <p>A comforting potato and cauliflower classic.</p>
+          </article>
+          <article class="mini-card">
+            <span class="chip">High protein</span>
+            <h3>Chana Masala</h3>
+            <p>Bold spices, chickpeas, and plenty of flavour.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="category-strip container" aria-labelledby="category-title">
+        <div class="section-head">
+          <h2 id="category-title">Popular categories</h2>
+        </div>
+        <div class="category-grid" id="category-grid"></div>
+      </section>
+
+      <section class="how-it-works container" aria-labelledby="how-it-works-title">
+        <div class="section-head">
+          <h2 id="how-it-works-title">How it works</h2>
+        </div>
+        <div class="steps-grid">
+          <article class="step-card">
+            <div class="step-number">1</div>
+            <h3>Choose ingredients</h3>
+            <p>Search and select the items already in your kitchen.</p>
+          </article>
+          <article class="step-card">
+            <div class="step-number">2</div>
+            <h3>Find matches</h3>
+            <p>We rank recipes by the strongest required-ingredient match.</p>
+          </article>
+          <article class="step-card">
+            <div class="step-number">3</div>
+            <h3>Cook and save</h3>
+            <p>View ingredients, instructions, and save favorites for later.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="ingredient-finder" class="finder-section container">
+        <div class="section-head split-head">
+          <h2>Ingredient finder</h2>
+          <span id="selection-counter" class="selection-counter">0 selected</span>
+        </div>
+
+        <div class="finder-panel">
+          <div class="finder-controls">
+            <label class="field-label" for="ingredient-search">Search ingredients</label>
+            <div class="search-bar">
+              <input id="ingredient-search" type="search" placeholder="Search tomatoes, onion, rice..." />
+            </div>
+
+            <label class="field-label" for="category-filter">Category</label>
+            <select id="category-filter">
+              <option value="">All categories</option>
+            </select>
+          </div>
+
+          <div class="ingredient-list-wrap">
+            <div id="ingredient-list" class="ingredient-list" aria-live="polite"></div>
+          </div>
+
+          <div class="selection-area">
+            <div class="selected-header">
+              <h3>Selected ingredients</h3>
+              <button id="clear-selection" class="text-button" type="button">Clear all</button>
+            </div>
+            <div id="selected-chips" class="selected-chips" aria-live="polite"></div>
+            <button id="find-recipes" class="primary-btn full-width" type="button">Find My Recipes</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="results" class="results-section container">
+        <div class="section-head split-head">
+          <h2>Recipe results</h2>
+          <div class="results-actions">
+            <label class="sr-only" for="results-sort">Sort</label>
+            <select id="results-sort">
+              <option value="best-match">Best match</option>
+              <option value="shortest-time">Shortest time</option>
+              <option value="alphabetical">Alphabetical</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="filter-bar" id="recipe-filters">
+          <label>
+            <span>Vegetarian</span>
+            <input id="filter-vegetarian" type="checkbox" />
+          </label>
+          <label>
+            <span>Vegan</span>
+            <input id="filter-vegan" type="checkbox" />
+          </label>
+          <label>
+            <span>Egg-free</span>
+            <input id="filter-egg-free" type="checkbox" />
+          </label>
+          <label>
+            <span>Dairy-free</span>
+            <input id="filter-dairy-free" type="checkbox" />
+          </label>
+          <label>
+            <span>Max time</span>
+            <input id="filter-max-time" type="number" min="15" max="180" placeholder="45" />
+          </label>
+          <label>
+            <span>Difficulty</span>
+            <select id="filter-difficulty">
+              <option value="">Any</option>
+              <option value="Easy">Easy</option>
+              <option value="Medium">Medium</option>
+              <option value="Hard">Hard</option>
+            </select>
+          </label>
+          <label>
+            <span>Min match</span>
+            <input id="filter-min-match" type="number" min="0" max="100" value="0" />
+          </label>
+        </div>
+
+        <div id="recipe-results" class="recipe-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="favorites" class="favorites-section container">
+        <div class="section-head">
+          <h2>Your favourites</h2>
+        </div>
+        <div id="favorites-list" class="favorites-list"></div>
+      </section>
+
+      <section id="about" class="about-section container">
+        <div class="about-grid">
+          <div>
+            <span class="eyebrow">About the project</span>
+            <h2>Built for practical home cooking.</h2>
+            <p>
+              What’sInMyKitchen helps students and home cooks discover recipes from ingredients they already have.
+              The matching logic compares required ingredients against your pantry and shows exactly what is missing.
+            </p>
+            <p>
+              The app uses a Java HTTP server and MySQL database, with a responsive frontend that feels polished on mobile, tablet, and desktop.
+            </p>
+          </div>
+          <div class="about-box">
+            <h3>How the matching algorithm works</h3>
+            <p>Each recipe calculates a required-ingredient match by dividing matched required ingredients by total required ingredients.</p>
+            <p>Optional ingredients do not increase the percentage and are shown separately as extras to consider.</p>
+            <div class="meta-links">
+              <a href="#">GitHub repository</a>
+              <a href="#">Contact / Feedback</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-grid">
+        <div>
+          <h3>What’sInMyKitchen</h3>
+          <p>Smart recipes built from the ingredients you already have.</p>
+        </div>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#ingredient-finder">Ingredient finder</a></li>
+            <li><a href="#results">Recipe results</a></li>
+            <li><a href="#favorites">Favourites</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Project</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#">GitHub</a></li>
+            <li><a href="#">Feedback</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <span>© 2026 What’sInMyKitchen</span>
+      </div>
+    </footer>
+
+    <div id="recipe-modal" class="modal hidden" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="modal-backdrop" data-close-modal="true"></div>
+      <div class="modal-panel">
+        <button type="button" class="modal-close" aria-label="Close recipe details" data-close-modal="true">×</button>
+        <div id="modal-content"></div>
+      </div>
+    </div>
+
+    <div id="toast-root" class="toast-root" aria-live="polite" aria-atomic="true"></div>
+
+    <script type="module" src="/js/app.js?v=20261013"></script>
+  </body>
+</html>

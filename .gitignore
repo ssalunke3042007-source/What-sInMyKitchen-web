@@ -1,0 +1,13 @@
+build/
+*.class
+*.log
+.env
+.env.local
+.DS_Store
+target/
+.idea/
+.vscode/
+**/.classpath
+**/.project
+**/.settings/
+lib/*.jar
